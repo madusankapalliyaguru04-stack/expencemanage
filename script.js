@@ -2,8 +2,13 @@ const CE=[["🍽️","කෑම"],["🚌","ගමන්"],["🛒","සාප්�
 const CI=[["💼","වැටුප"],["🎁","තෑගි"],["📈","ව්‍යාපාර"],["💰","වෙනත්"]];
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 let tx=[],type="e",cat=0,view="home",mo=new Date();mo.setDate(1);
-const KEY="expenses_v1";
-const EN={'මගේ වියදම්':'My Expenses','මෙම මාසයේ ශේෂය':'This month’s balance','ආදායම':'Income','වියදම':'Expense','මෑත ගනුදෙනු':'Recent transactions','මුදල (Rs.)':'Amount (Rs.)','වර්ගය':'Category','සටහන':'Note','දිනය':'Date','සුරකින්න':'Save','ඉතිහාසය':'History','එක් කරන්න':'Add','සාරාංශ':'Summary','මුල':'Home','වර්ග අනුව වියදම':'Spending by category','දත්ත':'Data','දත්ත උපස්ථ කරන්න (බාගත)':'Back up data (download)','උපස්ථයෙන් ආපසු ගන්න':'Restore from backup','සියලු දත්ත මකන්න':'Delete all data','කෑම':'Food','ගමන්':'Transport','සාප්පු':'Shopping','බිල්පත්':'Bills','නිවස':'Home','සෞඛ්‍ය':'Health','විනෝදය':'Fun','අධ්‍යාපන':'Education','වැටුප':'Salary','තෑගි':'Gifts','ව්‍යාපාර':'Business','වෙනත්':'Other','දත්ත සුරැකීමට නොහැකි විය':'Could not save data','කරුණාකර නිවැරදි මුදලක් ඇතුළත් කරන්න':'Enter a valid amount','සුරකින ලදී':'Saved','මකා දමන ලදී':'Deleted','උපස්ථ ගොනුව සකස් විය':'Backup file created','දත්ත ආපසු ගන්නා ලදී':'Data restored','ගොනුව වලංගු නැත':'Invalid file','දත්ත මකා දමන ලදී':'All data deleted','මෙම ගනුදෙනුව මකන්නද?':'Delete this transaction?','සියලු දත්ත ස්ථිරවම මැකේ. ඉදිරියට යන්නද?':'This permanently deletes all data. Continue?','තවම ගනුදෙනු නැත.<br>පහළ “එක් කරන්න” ඔබා පළමු වියදම සටහන් කරන්න.':'No transactions yet.<br>Tap “Add” below to log your first expense.','මෙම මාසයේ ගනුදෙනු නැත.':'No transactions this month.','වියදම් දත්ත නැත.':'No spending data.','උදා: දවල් කෑම':'e.g. Lunch'};
+let ai=0,names=[];try{ai=+localStorage.getItem("acc")||0;names=JSON.parse(localStorage.getItem("accNames"))||[]}catch(e){}
+let KEY=ai?"expenses_v2":"expenses_v1";
+function aName(i){return names[i]||tr("ගිණුම")+" "+(i+1)}
+function accUI(){$("#accs").innerHTML=[0,1].map(i=>`<button class="${i==ai?"on":""}" data-a="${i}">${esc(aName(i))}</button>`).join("")+'<button data-rn="1" style="flex:none;padding:10px 14px" aria-label="Rename">✎</button>'}
+function setAcc(i){ai=i;KEY=i?"expenses_v2":"expenses_v1";try{localStorage.setItem("acc",i)}catch(e){}load();accUI();render()}
+function rename(){const v=prompt(tr("ගිණුමේ නම"),aName(ai));if(v!==null){names[ai]=v.trim().slice(0,20);try{localStorage.setItem("accNames",JSON.stringify(names))}catch(e){}accUI()}}
+const EN={'මගේ වියදම්':'My Expenses','මෙම මාසයේ ශේෂය':'This month’s balance','ආදායම':'Income','වියදම':'Expense','මෑත ගනුදෙනු':'Recent transactions','මුදල (Rs.)':'Amount (Rs.)','වර්ගය':'Category','සටහන':'Note','දිනය':'Date','සුරකින්න':'Save','ඉතිහාසය':'History','එක් කරන්න':'Add','සාරාංශ':'Summary','මුල':'Home','වර්ග අනුව වියදම':'Spending by category','දත්ත':'Data','දත්ත උපස්ථ කරන්න (බාගත)':'Back up data (download)','උපස්ථයෙන් ආපසු ගන්න':'Restore from backup','සියලු දත්ත මකන්න':'Delete all data','කෑම':'Food','ගමන්':'Transport','සාප්පු':'Shopping','බිල්පත්':'Bills','නිවස':'Home','සෞඛ්‍ය':'Health','විනෝදය':'Fun','අධ්‍යාපන':'Education','වැටුප':'Salary','තෑගි':'Gifts','ව්‍යාපාර':'Business','වෙනත්':'Other','දත්ත සුරැකීමට නොහැකි විය':'Could not save data','කරුණාකර නිවැරදි මුදලක් ඇතුළත් කරන්න':'Enter a valid amount','සුරකින ලදී':'Saved','මකා දමන ලදී':'Deleted','උපස්ථ ගොනුව සකස් විය':'Backup file created','දත්ත ආපසු ගන්නා ලදී':'Data restored','ගොනුව වලංගු නැත':'Invalid file','දත්ත මකා දමන ලදී':'All data deleted','මෙම ගනුදෙනුව මකන්නද?':'Delete this transaction?','සියලු දත්ත ස්ථිරවම මැකේ. ඉදිරියට යන්නද?':'This permanently deletes all data. Continue?','තවම ගනුදෙනු නැත.<br>පහළ “එක් කරන්න” ඔබා පළමු වියදම සටහන් කරන්න.':'No transactions yet.<br>Tap “Add” below to log your first expense.','මෙම මාසයේ ගනුදෙනු නැත.':'No transactions this month.','වියදම් දත්ත නැත.':'No spending data.','උදා: දවල් කෑම':'e.g. Lunch','ගිණුම':'Account','ගිණුමේ නම':'Account name'};
 let lang="si";try{lang=localStorage.getItem("lang")||"si"}catch(e){}
 function tr(s){return lang=="en"&&EN[s]?EN[s]:s}
 const LOC=()=>lang=="en"?"en-US":"si-LK";
@@ -11,12 +16,12 @@ const orig=new WeakMap();
 function applyLang(){
  document.documentElement.lang=lang;
  const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let n;
- while(n=w.nextNode()){if(n.parentNode.closest("script,#hList,#mList,#sBars,#aCats,#toast,#today"))continue;if(!orig.has(n))orig.set(n,n.nodeValue);const o=orig.get(n),k=o.trim();n.nodeValue=lang=="en"&&EN[k]?o.replace(k,EN[k]):o}
+ while(n=w.nextNode()){if(n.parentNode.closest("script,#hList,#mList,#sBars,#aCats,#toast,#today,#accs"))continue;if(!orig.has(n))orig.set(n,n.nodeValue);const o=orig.get(n),k=o.trim();n.nodeValue=lang=="en"&&EN[k]?o.replace(k,EN[k]):o}
  $("#aNote").placeholder=tr("උදා: දවල් කෑම");
  document.title=tr("මගේ වියදම්");
  $("#lang").textContent=lang=="en"?"සිං":"EN";
  $("#today").textContent=new Date().toLocaleDateString(LOC(),{weekday:"long",month:"long",day:"numeric"});
- cats();render();
+ accUI();cats();render();
 }
 function load(){try{tx=JSON.parse(localStorage.getItem(KEY))||[]}catch(e){tx=[]}}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(tx))}catch(e){toast("දත්ත සුරැකීමට නොහැකි විය")}}
@@ -50,7 +55,9 @@ function go(v){view=v;$$(".view").forEach(e=>e.classList.toggle("on",e.id=="v-"+
 document.addEventListener("click",e=>{
   const b=e.target.closest("button");if(!b)return;
   if(b.dataset.v)go(b.dataset.v);
-  else if(b.dataset.t){type=b.dataset.t;$$(".seg button").forEach(x=>x.classList.toggle("on",x==b));cats()}
+  else if(b.dataset.a){setAcc(+b.dataset.a)}
+  else if(b.dataset.rn){rename()}
+  else if(b.dataset.t){type=b.dataset.t;$$("#v-add .seg button").forEach(x=>x.classList.toggle("on",x==b));cats()}
   else if(b.dataset.c){cat=+b.dataset.c;cats()}
   else if(b.dataset.m){mo.setMonth(mo.getMonth()+ +b.dataset.m);render()}
   else if(b.dataset.id){if(confirm(tr("මෙම ගනුදෙනුව මකන්නද?"))){tx=tx.filter(t=>t.id!=b.dataset.id);save();render();toast("මකා දමන ලදී")}}
