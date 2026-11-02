@@ -5,6 +5,8 @@ Simple expense manager built with HTML, CSS and vanilla JavaScript. No backend o
 ## Features
 - Add income and expenses with category, note and date
 - Monthly balance, history and category summary
+- Two separate accounts (each with its own data and editable name)
+- Logo and favicon (`logo.svg`)
 - Dark / Light mode
 - Sinhala / English language switch
 - Backup (JSON download) and restore
