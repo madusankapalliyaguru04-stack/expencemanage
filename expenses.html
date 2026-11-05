@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>මගේ වියදම්</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F2F5F3;--sf:#fff;--tx:#12302A;--mu:#6B7F79;--ac:#0E7C66;--acs:#DDF0EA;--ex:#D4483B;--in:#0E7C66;--bd:#E1E8E5;--sh:0 4px 18px rgba(18,48,42,.08)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0E1513;--sf:#17221F;--tx:#E6F0EC;--mu:#8CA29B;--ac:#3FC7A6;--acs:#1B3A33;--ex:#FF7A6B;--in:#3FC7A6;--bd:#243430;--sh:none}}
+:root[data-theme="dark"]{--bg:#0E1513;--sf:#17221F;--tx:#E6F0EC;--mu:#8CA29B;--ac:#3FC7A6;--acs:#1B3A33;--ex:#FF7A6B;--in:#3FC7A6;--bd:#243430;--sh:none}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{background:var(--bg);color:var(--tx);font-family:'Noto Sans Sinhala',system-ui,sans-serif;display:flex;flex-direction:column;max-width:560px;margin:0 auto;font-size:15px;line-height:1.5}
+header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:var(--bg);position:sticky;top:0;z-index:5}
+header h1{font-size:19px;font-weight:700}
+header small{display:block;color:var(--mu);font-size:12px;font-weight:400}
+.ib{width:42px;height:42px;border-radius:14px;border:1px solid var(--bd);background:var(--sf);color:var(--tx);font-size:19px;cursor:pointer}
+main{flex:1;overflow-y:auto;padding:4px 18px 96px}
+.view{display:none}.view.on{display:block}
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:20px;padding:16px;box-shadow:var(--sh);margin-bottom:14px}
+.bal{background:var(--ac);color:#fff;border:0;border-radius:26px;padding:22px}
+:root[data-theme="dark"] .bal,:root:not([data-theme="light"]) .bal{color:#07241D}
+.bal .l{opacity:.8;font-size:13px}.bal .n{font-size:34px;font-weight:700;letter-spacing:-.5px}
+.row{display:flex;gap:10px;margin-top:14px}
+.row>div{flex:1;background:rgba(255,255,255,.16);border-radius:14px;padding:10px 12px;font-size:12px}
+.row b{display:block;font-size:16px}
+h2{font-size:16px;margin:18px 0 10px}
+.item{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--bd)}
+.item:last-child{border:0}
+.ic{width:42px;height:42px;border-radius:13px;background:var(--acs);display:grid;place-items:center;font-size:20px;flex:none}
+.item .m{flex:1;min-width:0}.item .m b{display:block;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.item .m span{font-size:12px;color:var(--mu)}
+.amt{font-weight:700;white-space:nowrap}.amt.e{color:var(--ex)}.amt.i{color:var(--in)}
+.del{background:none;border:0;color:var(--mu);font-size:16px;padding:6px;cursor:pointer}
+.empty{text-align:center;color:var(--mu);padding:28px 10px}
+.seg{display:flex;background:var(--acs);border-radius:14px;padding:4px;margin-bottom:14px}
+.seg button{flex:1;border:0;background:none;color:var(--tx);padding:10px;border-radius:11px;font:inherit;font-weight:600;cursor:pointer}
+.seg button.on{background:var(--sf);box-shadow:var(--sh)}
+label{display:block;font-size:13px;color:var(--mu);margin:12px 0 6px}
+input,select{width:100%;padding:13px 14px;border-radius:14px;border:1px solid var(--bd);background:var(--bg);color:var(--tx);font:inherit}
+input:focus,select:focus,button:focus-visible{outline:2px solid var(--ac);outline-offset:1px}
+.big{font-size:26px;font-weight:700}
+.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.cats button{border:1px solid var(--bd);background:var(--bg);color:var(--tx);border-radius:14px;padding:10px 2px;font:inherit;font-size:11px;cursor:pointer}
+.cats button span{display:block;font-size:22px}
+.cats button.on{border-color:var(--ac);background:var(--acs)}
+.btn{width:100%;margin-top:18px;padding:15px;border:0;border-radius:16px;background:var(--ac);color:#fff;font:inherit;font-weight:700;font-size:16px;cursor:pointer}
+:root[data-theme="dark"] .btn,:root:not([data-theme="light"]) .btn{color:#07241D}
+.btn.g{background:var(--sf);color:var(--tx);border:1px solid var(--bd);margin-top:10px}
+.btn.d{background:none;color:var(--ex);border:1px solid var(--ex)}
+.bar{margin:12px 0}.bar .t{display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px}
+.bar .tr{height:10px;background:var(--acs);border-radius:6px;overflow:hidden}.bar .f{height:100%;background:var(--ac);border-radius:6px}
+.mo{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:560px;display:flex;background:var(--sf);border-top:1px solid var(--bd);padding:8px 8px calc(8px + env(safe-area-inset-bottom,0px));z-index:6}
+nav button{flex:1;border:0;background:none;color:var(--mu);font:inherit;font-size:11px;padding:4px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px}
+nav button i{font-style:normal;font-size:21px}
+nav button.on{color:var(--ac);font-weight:700}
+nav .add i{background:var(--ac);color:#fff;width:46px;height:46px;border-radius:16px;display:grid;place-items:center;margin-top:-18px;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.cats button{position:relative}
+.cats .x{position:absolute;top:-6px;right:-4px;width:20px;height:20px;border-radius:50%;background:var(--ex);color:#fff;font-size:11px;display:grid;place-items:center;line-height:1}
+.cats .plus{border-style:dashed;color:var(--mu)}
+.lh{display:flex;justify-content:space-between;align-items:center}
+.lh a{font-size:12px;color:var(--ac);cursor:pointer;margin-top:12px;font-weight:600}
+.dr{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.dr label{margin:0 0 4px}
+.tot{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center}
+.tot div{background:var(--acs);border-radius:14px;padding:10px 4px;font-size:12px;color:var(--mu)}
+.tot b{display:block;font-size:14px;color:var(--tx);margin-top:2px}
+.st{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--bd);font-size:13px}
+.st:last-child{border:0}.st span{color:var(--mu)}
+#modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:flex-end;justify-content:center;z-index:20}
+#modal.on{display:flex}
+#modal .card{width:100%;max-width:560px;margin:0;border-radius:24px 24px 0 0;max-height:90%;overflow-y:auto}
+.eg{display:grid;grid-template-columns:repeat(8,1fr);gap:4px;margin-top:8px}
+.eg button{border:0;background:none;font-size:22px;padding:5px 0;border-radius:10px;cursor:pointer}
+.eg button.on{background:var(--acs)}
+.af{display:flex;gap:6px;margin-bottom:12px;overflow-x:auto;padding-bottom:2px}
+.af button{border:1px solid var(--bd);background:var(--sf);color:var(--tx);padding:7px 14px;border-radius:20px;font:inherit;font-size:13px;white-space:nowrap;cursor:pointer}
+.af button.on{background:var(--acs);border-color:var(--ac);font-weight:700}
+.seg.acc button{font-size:14px}
+#toast{position:fixed;bottom:92px;left:50%;transform:translateX(-50%);background:var(--tx);color:var(--bg);padding:10px 18px;border-radius:14px;opacity:0;pointer-events:none;transition:opacity .25s;z-index:9;font-size:14px}
+#toast.on{opacity:1}
+</style>
+</head>
+<body>
+<header>
+  <h1>මගේ වියදම් <small id="today"></small></h1>
+  <div style="display:flex;gap:8px"><button class="ib" id="lang" style="font-weight:700;font-size:13px;font-family:inherit">EN</button><button class="ib" id="theme" aria-label="Theme">🌙</button></div>
+</header>
+<main>
+  <section class="view on" id="v-home">
+    <div class="card bal">
+      <div class="l">මෙම මාසයේ ශේෂය</div>
+      <div class="n" id="hBal">Rs. 0</div>
+      <div class="row"><div>ආදායම<b id="hIn">0</b></div><div>වියදම<b id="hEx">0</b></div></div>
+    </div>
+    <h2>ගිණුම් ශේෂ</h2>
+    <div class="card" id="hAcc"></div>
+    <h2>මෑත ගනුදෙනු</h2>
+    <div class="card" id="hList"></div>
+  </section>
+
+  <section class="view" id="v-add">
+    <div class="seg" id="tSeg"><button class="on" data-t="e">වියදම</button><button data-t="i">ආදායම</button></div>
+    <div class="card">
+      <label>ගිණුම</label>
+      <div class="seg acc" id="aAcc"></div>
+      <label for="aAmt">මුදල (Rs.)</label>
+      <input id="aAmt" class="big" type="number" inputmode="decimal" placeholder="0.00" min="0">
+      <div class="lh"><label>වර්ගය</label><a id="cEdit">සංස්කරණය</a></div>
+      <div class="cats" id="aCats"></div>
+      <label for="aNote">සටහන</label>
+      <input id="aNote" type="text" placeholder="උදා: දවල් කෑම">
+      <label for="aDate">දිනය</label>
+      <input id="aDate" type="date">
+      <button class="btn" id="aSave">සුරකින්න</button>
+    </div>
+  </section>
+
+  <section class="view" id="v-hist">
+    <div class="af"></div>
+    <div class="mo"><button class="ib" data-m="-1">‹</button><b id="mLbl"></b><button class="ib" data-m="1">›</button></div>
+    <div class="card" id="mList"></div>
+  </section>
+
+  <section class="view" id="v-stat">
+    <div class="af"></div>
+    <div class="seg" id="sSeg"><button class="on" data-sm="m">මාසික</button><button data-sm="r">දින පරාසය</button></div>
+    <div class="mo" id="sMo"><button class="ib" data-m="-1">‹</button><b id="sLbl"></b><button class="ib" data-m="1">›</button></div>
+    <div class="dr" id="sRg" hidden><div><label for="rF">සිට</label><input id="rF" type="date"></div><div><label for="rT">දක්වා</label><input id="rT" type="date"></div></div>
+    <div class="card"><div class="tot"><div>ආදායම<b id="sIn"></b></div><div>වියදම<b id="sEx"></b></div><div>ශේෂය<b id="sBl"></b></div></div></div>
+    <div class="card" id="sStats"></div>
+    <div class="card"><b>වර්ග අනුව වියදම</b><div id="sBars"></div></div>
+    <h2>දත්ත</h2>
+    <button class="btn g" id="rn">ගිණුම් නම් වෙනස් කරන්න</button>
+    <button class="btn g" id="exp">දත්ත උපස්ථ කරන්න (බාගත)</button>
+    <button class="btn g" id="impB">උපස්ථයෙන් ආපසු ගන්න</button>
+    <input type="file" id="imp" accept=".json" hidden>
+    <button class="btn d" id="clr">සියලු දත්ත මකන්න</button>
+  </section>
+</main>
+<nav>
+  <button class="on" data-v="home"><i>🏠</i>මුල</button>
+  <button data-v="hist"><i>🧾</i>ඉතිහාසය</button>
+  <button class="add" data-v="add"><i>＋</i>එක් කරන්න</button>
+  <button data-v="stat"><i>📊</i>සාරාංශ</button>
+</nav>
+<div id="modal"><div class="card">
+  <b>නව වර්ගයක්</b>
+  <label for="mNm">නම</label><input id="mNm" type="text" maxlength="20" placeholder="උදා: ඉන්ධන">
+  <label for="mIc">අයිකනය (ඕනෑම emoji එකක් ටයිප් කරන්න හෝ තෝරන්න)</label><input id="mIc" type="text" maxlength="4" value="📦">
+  <div class="eg" id="mEg"></div>
+  <button class="btn" id="mSave">එක් කරන්න</button><button class="btn g" id="mCan">අවලංගු</button>
+</div></div>
+<div id="toast"></div>
+<script>
+const DE=[["🍽️","කෑම"],["🚌","ගමන්"],["🛒","සාප්පු"],["💡","බිල්පත්"],["🏠","නිවස"],["💊","සෞඛ්‍ය"],["🎬","විනෝදය"],["📚","අධ්‍යාපන"]];
+const DI=[["💼","වැටුප"],["🎁","තෑගි"],["📈","ව්‍යාපාර"],["💰","වෙනත්"]];
+const EMOJIS=[...new Intl.Segmenter(undefined,{granularity:"grapheme"}).segment("🍽️☕🍔🍕🍎🥗🍺🛒👕👟💄🧴💡💧📱💻🌐🚌🚗⛽🚲✈️🏠🛋️🔧🧹💊🏥💪🎬🎮🎵📚🎓🐶👶🎁💼📈💰🏦💳🧾🙏🛍️🎉✂️🚬📦")].map(x=>x.segment);
+let C={e:DE.map((c,i)=>({id:"e"+i,ic:c[0],nm:c[1]})),i:DI.map((c,i)=>({id:"i"+i,ic:c[0],nm:c[1]}))};
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+let tx=[],type="e",cat="e0",view="home",mo=new Date(),editC=false,smode="m",pick="📦";mo.setDate(1);
+const CK="cats_v1";
+let A=[{id:"a1",ic:"💵",nm:"මුදල්"},{id:"a2",ic:"🏦",nm:"බැංකුව"}],af="all",acc="a1";
+const an=id=>(A.find(a=>a.id==id)||A[0]).nm,fa=t=>af=="all"||(t.acct||"a1")==af;
+const KEY="expenses_v1";
+const EN={'මගේ වියදම්':'My Expenses','මෙම මාසයේ ශේෂය':'This month’s balance','ආදායම':'Income','වියදම':'Expense','මෑත ගනුදෙනු':'Recent transactions','මුදල (Rs.)':'Amount (Rs.)','වර්ගය':'Category','සටහන':'Note','දිනය':'Date','සුරකින්න':'Save','ඉතිහාසය':'History','එක් කරන්න':'Add','සාරාංශ':'Summary','මුල':'Home','වර්ග අනුව වියදම':'Spending by category','දත්ත':'Data','දත්ත උපස්ථ කරන්න (බාගත)':'Back up data (download)','උපස්ථයෙන් ආපසු ගන්න':'Restore from backup','සියලු දත්ත මකන්න':'Delete all data','කෑම':'Food','ගමන්':'Transport','සාප්පු':'Shopping','බිල්පත්':'Bills','නිවස':'Home','සෞඛ්‍ය':'Health','විනෝදය':'Fun','අධ්‍යාපන':'Education','වැටුප':'Salary','තෑගි':'Gifts','ව්‍යාපාර':'Business','වෙනත්':'Other','දත්ත සුරැකීමට නොහැකි විය':'Could not save data','කරුණාකර නිවැරදි මුදලක් ඇතුළත් කරන්න':'Enter a valid amount','සුරකින ලදී':'Saved','මකා දමන ලදී':'Deleted','උපස්ථ ගොනුව සකස් විය':'Backup file created','දත්ත ආපසු ගන්නා ලදී':'Data restored','ගොනුව වලංගු නැත':'Invalid file','දත්ත මකා දමන ලදී':'All data deleted','මෙම ගනුදෙනුව මකන්නද?':'Delete this transaction?','සියලු දත්ත ස්ථිරවම මැකේ. ඉදිරියට යන්නද?':'This permanently deletes all data. Continue?','තවම ගනුදෙනු නැත.<br>පහළ “එක් කරන්න” ඔබා පළමු වියදම සටහන් කරන්න.':'No transactions yet.<br>Tap “Add” below to log your first expense.','මෙම මාසයේ ගනුදෙනු නැත.':'No transactions this month.','වියදම් දත්ත නැත.':'No spending data.','උදා: දවල් කෑම':'e.g. Lunch','මාසික':'Monthly','දින පරාසය':'Date range','සිට':'From','දක්වා':'To','ශේෂය':'Balance','නව වර්ගයක්':'New category','නම':'Name','අයිකනය (ඕනෑම emoji එකක් ටයිප් කරන්න හෝ තෝරන්න)':'Icon (type or pick any emoji)','එක් කරන්න':'Add','අවලංගු':'Cancel','උදා: ඉන්ධන':'e.g. Fuel','සංස්කරණය':'Edit','අවසන්':'Done','නව':'New','ගනුදෙනු ගණන':'Transactions','දිනකට සාමාන්‍ය වියදම':'Avg. daily spending','ඉතිරි කිරීමේ අනුපාතය':'Savings rate','වැඩිම වියදම් වර්ගය':'Top category','විශාලතම වියදම':'Largest expense','මෙම කාලය තුළ ගනුදෙනු නැත.':'No transactions in this period.','මෙම වර්ගය මකන්නද? (පැරණි ගනුදෙනු සුරැකේ)':'Delete this category? (Past transactions are kept)','නම සහ අයිකනය ඇතුළත් කරන්න':'Enter a name and icon','ගිණුම් ශේෂ':'Account balances','ගිණුම':'Account','සියල්ල':'All','ගිණුම් නම් වෙනස් කරන්න':'Rename accounts','නව නම':'New name'};
+let lang="si";try{lang=localStorage.getItem("lang")||"si"}catch(e){}
+function tr(s){return lang=="en"&&EN[s]?EN[s]:s}
+const LOC=()=>lang=="en"?"en-US":"si-LK";
+const orig=new WeakMap();
+function applyLang(){
+ document.documentElement.lang=lang;
+ const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let n;
+ while(n=w.nextNode()){if(n.parentNode.closest("script,#hList,#mList,#sBars,#sStats,#aCats,#cEdit,#sIn,#sEx,#sBl,#mEg,#aAcc,.af,#hAcc,#toast,#today"))continue;if(!orig.has(n))orig.set(n,n.nodeValue);const o=orig.get(n),k=o.trim();n.nodeValue=lang=="en"&&EN[k]?o.replace(k,EN[k]):o}
+ $("#aNote").placeholder=tr("උදා: දවල් කෑම");$("#mNm").placeholder=tr("උදා: ඉන්ධන");
+ document.title=tr("මගේ වියදම්");
+ $("#lang").textContent=lang=="en"?"සිං":"EN";
+ $("#today").textContent=new Date().toLocaleDateString(LOC(),{weekday:"long",month:"long",day:"numeric"});
+ cats();render();
+}
+function load(){try{tx=JSON.parse(localStorage.getItem(KEY))||[]}catch(e){tx=[]}
+ tx.forEach(t=>{if(typeof t.cat=="number")t.cat=t.type+t.cat;if(!t.acct)t.acct="a1"});
+ try{const a=JSON.parse(localStorage.getItem("accts_v1"));if(Array.isArray(a)&&a.length)A=a}catch(e){}
+ try{const c=JSON.parse(localStorage.getItem(CK));if(c&&c.e&&c.i)C=c}catch(e){}}
+function saveC(){try{localStorage.setItem(CK,JSON.stringify(C))}catch(e){toast("දත්ත සුරැකීමට නොහැකි විය")}}
+const cof=t=>C[t.type].find(c=>c.id==t.cat)||{ic:"📦",nm:"වෙනත්"};
+function save(){try{localStorage.setItem(KEY,JSON.stringify(tx))}catch(e){toast("දත්ත සුරැකීමට නොහැකි විය")}}
+const money=n=>"Rs. "+Number(n).toLocaleString("en-US",{maximumFractionDigits:2});
+const ymd=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+const mkey=d=>ymd(d).slice(0,7);
+function toast(m){const el=$("#toast");el.textContent=tr(m);el.classList.add("on");setTimeout(()=>el.classList.remove("on"),1800)}
+function icon(t){return cof(t).ic}
+function cname(t){return tr(cof(t).nm)}
+function itemHTML(t){return`<div class="item"><div class="ic">${icon(t)}</div><div class="m"><b>${esc(t.note||cname(t))}</b><span>${cname(t)} • ${esc(an(t.acct))} • ${t.date}</span></div><div class="amt ${t.type}">${t.type=="e"?"−":"+"}${money(t.amt)}</div><button class="del" data-id="${t.id}" aria-label="මකන්න">✕</button></div>`}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+const sorted=l=>[...l].sort((a,b)=>b.date.localeCompare(a.date)||b.id-a.id);
+function inMonth(d){return tx.filter(t=>t.date.startsWith(mkey(d)))}
+function sums(l){let i=0,e=0;l.forEach(t=>t.type=="i"?i+=t.amt:e+=t.amt);return{i,e}}
+function render(){
+  const now=new Date(),cur=inMonth(now),s=sums(cur);
+  $("#hBal").textContent=money(s.i-s.e);$("#hIn").textContent=money(s.i);$("#hEx").textContent=money(s.e);
+  const r=sorted(tx).slice(0,6);
+  $("#hList").innerHTML=r.length?r.map(itemHTML).join(""):'<div class="empty">'+tr('තවම ගනුදෙනු නැත.<br>පහළ “එක් කරන්න” ඔබා පළමු වියදම සටහන් කරන්න.')+'</div>';
+  const lbl=mo.toLocaleDateString(LOC(),{year:"numeric",month:"long"});
+  $("#mLbl").textContent=lbl;$("#sLbl").textContent=lbl;
+  accUI();const ml=sorted(inMonth(mo).filter(fa));
+  $("#mList").innerHTML=ml.length?ml.map(itemHTML).join(""):'<div class="empty">'+tr('මෙම මාසයේ ගනුදෙනු නැත.')+'</div>';
+  renderStat();
+}
+function accUI(){
+ $("#aAcc").innerHTML=A.map(a=>`<button class="${a.id==acc?"on":""}" data-ac="${a.id}">${a.ic} ${esc(a.nm)}</button>`).join("");
+ const o=[["all",tr("සියල්ල")],...A.map(a=>[a.id,a.ic+" "+a.nm])];
+ $$(".af").forEach(el=>el.innerHTML=o.map(x=>`<button class="${x[0]==af?"on":""}" data-af="${x[0]}">${esc(x[1])}</button>`).join(""));
+ $("#hAcc").innerHTML=A.map(a=>{const b=tx.filter(t=>(t.acct||"a1")==a.id).reduce((s,t)=>s+(t.type=="i"?t.amt:-t.amt),0);return`<div class="item"><div class="ic">${a.ic}</div><div class="m"><b>${esc(a.nm)}</b></div><div class="amt ${b<0?"e":"i"}">${money(b)}</div></div>`}).join("");
+}
+function range(){
+  if(smode=="r"){return[$("#rF").value||"0000-01-01",$("#rT").value||"9999-12-31"]}
+  const f=mkey(mo)+"-01",l=new Date(mo.getFullYear(),mo.getMonth()+1,0);return[f,ymd(l)]
+}
+function renderStat(){
+  const[f,t]=range(),l=tx.filter(x=>x.date>=f&&x.date<=t&&fa(x)),s=sums(l),ex=l.filter(x=>x.type=="e");
+  $("#sIn").textContent=money(s.i);$("#sEx").textContent=money(s.e);$("#sBl").textContent=money(s.i-s.e);
+  const tot=s.e,by={};ex.forEach(x=>by[x.cat]=(by[x.cat]||0)+x.amt);
+  const ks=Object.keys(by).sort((a,b)=>by[b]-by[a]);
+  const nm=k=>{const c=C.e.find(c=>c.id==k)||{ic:"📦",nm:"වෙනත්"};return c.ic+" "+tr(c.nm)};
+  const today=ymd(new Date());let end=t<today?t:today;if(end<f)end=t;
+  const days=Math.max(1,Math.round((new Date(end)-new Date(f))/864e5)+1);
+  const big=ex.slice().sort((a,b)=>b.amt-a.amt)[0];
+  const rate=s.i>0?Math.round((s.i-s.e)/s.i*100)+"%":"—";
+  $("#sStats").innerHTML=l.length?`<div class="st"><span>${tr("ගනුදෙනු ගණන")}</span><b>${l.length}</b></div><div class="st"><span>${tr("දිනකට සාමාන්‍ය වියදම")}</span><b>${money(tot/days)}</b></div><div class="st"><span>${tr("ඉතිරි කිරීමේ අනුපාතය")}</span><b>${rate}</b></div>`+(ks.length?`<div class="st"><span>${tr("වැඩිම වියදම් වර්ගය")}</span><b>${nm(ks[0])}</b></div>`:"")+(big?`<div class="st"><span>${tr("විශාලතම වියදම")}</span><b>${money(big.amt)}</b></div>`:""):'<div class="empty">'+tr('මෙම කාලය තුළ ගනුදෙනු නැත.')+'</div>';
+  $("#sBars").innerHTML=ks.length?ks.map(k=>`<div class="bar"><div class="t"><span>${nm(k)}</span><span>${money(by[k])}</span></div><div class="tr"><div class="f" style="width:${by[k]/tot*100}%"></div></div></div>`).join(""):'<div class="empty">'+tr('වියදම් දත්ත නැත.')+'</div>';
+}
+function cats(){const l=C[type];if(!l.find(c=>c.id==cat))cat=l[0].id;
+ $("#aCats").innerHTML=l.map(c=>{const cu=c.id[0]=="c";return`<button class="${c.id==cat?"on":""}" data-c="${c.id}"><span>${c.ic}</span>${esc(tr(c.nm))}${editC&&cu?`<i class="x" data-xc="${c.id}">✕</i>`:""}</button>`}).join("")+`<button class="plus" data-add="1"><span>＋</span>${tr("නව")}</button>`;
+ $("#cEdit").textContent=tr(editC?"අවසන්":"සංස්කරණය")}
+function go(v){view=v;$$(".view").forEach(e=>e.classList.toggle("on",e.id=="v-"+v));$$("nav button").forEach(b=>b.classList.toggle("on",b.dataset.v==v));$("main").scrollTop=0;render()}
+document.addEventListener("click",e=>{
+  const xc=e.target.closest("[data-xc]");
+  if(xc){e.stopPropagation();if(confirm(tr("මෙම වර්ගය මකන්නද? (පැරණි ගනුදෙනු සුරැකේ)"))){C[type]=C[type].filter(c=>c.id!=xc.dataset.xc);saveC();cats();render()}return}
+  const b=e.target.closest("button");if(!b)return;
+  if(b.dataset.v)go(b.dataset.v);
+  else if(b.dataset.t){type=b.dataset.t;$$("#tSeg button").forEach(x=>x.classList.toggle("on",x==b));cats()}
+  else if(b.dataset.sm){smode=b.dataset.sm;$$("#sSeg button").forEach(x=>x.classList.toggle("on",x==b));$("#sMo").hidden=smode=="r";$("#sRg").hidden=smode=="m";renderStat()}
+  else if(b.dataset.ac){acc=b.dataset.ac;accUI()}
+  else if(b.dataset.af){af=b.dataset.af;render()}
+  else if(b.dataset.add)openM();
+  else if(b.dataset.c){cat=b.dataset.c;cats()}
+  else if(b.dataset.m){mo.setMonth(mo.getMonth()+ +b.dataset.m);render()}
+  else if(b.dataset.id){if(confirm(tr("මෙම ගනුදෙනුව මකන්නද?"))){tx=tx.filter(t=>t.id!=b.dataset.id);save();render();toast("මකා දමන ලදී")}}
+});
+function openM(){pick="📦";$("#mNm").value="";$("#mIc").value=pick;$("#modal").classList.add("on");eg()}
+function eg(){$("#mEg").innerHTML=EMOJIS.map(e=>`<button data-e="${e}" class="${e==$("#mIc").value?"on":""}">${e}</button>`).join("")}
+$("#mEg").onclick=e=>{const b=e.target.closest("button");if(b){$("#mIc").value=b.dataset.e;eg()}};
+$("#mIc").oninput=eg;
+$("#mCan").onclick=()=>$("#modal").classList.remove("on");
+$("#mSave").onclick=()=>{const nm=$("#mNm").value.trim(),ic=$("#mIc").value.trim();
+ if(!nm||!ic){toast("නම සහ අයිකනය ඇතුළත් කරන්න");return}
+ const id="c"+Date.now();C[type].push({id,ic,nm});cat=id;saveC();$("#modal").classList.remove("on");cats();toast("සුරකින ලදී")};
+$("#cEdit").onclick=()=>{editC=!editC;cats()};
+$("#rF").onchange=$("#rT").onchange=renderStat;
+$("#aSave").onclick=()=>{
+  const a=parseFloat($("#aAmt").value);
+  if(!(a>0)){toast("කරුණාකර නිවැරදි මුදලක් ඇතුළත් කරන්න");$("#aAmt").focus();return}
+  tx.push({id:Date.now(),type,cat,acct:acc,amt:a,note:$("#aNote").value.trim(),date:$("#aDate").value||ymd(new Date())});
+  save();$("#aAmt").value="";$("#aNote").value="";toast("සුරකින ලදී");go("home");
+};
+function theme(t){document.documentElement.dataset.theme=t;$("#theme").textContent=t=="dark"?"☀️":"🌙";try{localStorage.setItem("theme",t)}catch(e){}}
+$("#theme").onclick=()=>theme(document.documentElement.dataset.theme=="dark"?"light":"dark");
+$("#exp").onclick=()=>{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(tx)],{type:"application/json"}));a.download="expenses-backup.json";a.click();toast("උපස්ථ ගොනුව සකස් විය")};
+$("#impB").onclick=()=>$("#imp").click();
+$("#imp").onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);if(!Array.isArray(d))throw 0;tx=d;tx.forEach(t=>{if(typeof t.cat=="number")t.cat=t.type+t.cat});save();render();toast("දත්ත ආපසු ගන්නා ලදී")}catch(x){toast("ගොනුව වලංගු නැත")}};r.readAsText(f)};
+$("#rn").onclick=()=>{A.forEach(a=>{const n=prompt(tr("නව නම")+": "+a.ic+" "+a.nm,a.nm);if(n&&n.trim())a.nm=n.trim()});try{localStorage.setItem("accts_v1",JSON.stringify(A))}catch(e){}render();toast("සුරකින ලදී")};
+$("#clr").onclick=()=>{if(confirm(tr("සියලු දත්ත ස්ථිරවම මැකේ. ඉදිරියට යන්නද?"))){tx=[];save();render();toast("දත්ත මකා දමන ලදී")}};
+let t0="light";try{t0=localStorage.getItem("theme")||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light")}catch(e){}
+theme(t0);load();cats();{const n=new Date();$("#rF").value=ymd(new Date(n.getFullYear(),n.getMonth(),1));$("#rT").value=ymd(n)}$("#aDate").value=ymd(new Date());
+$("#lang").onclick=()=>{lang=lang=="en"?"si":"en";try{localStorage.setItem("lang",lang)}catch(e){}applyLang()};
+applyLang();
+render();
+</script>
+</body>
+</html>
